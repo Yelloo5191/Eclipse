@@ -18,7 +18,7 @@ TOKEN = os.getenv('TOKEN')
 owners = [304024578009595907, 219323433719300105]
 guilds = [837808972902957128]
 client = commands.Bot(intents=intents, owner_ids=set(
-    owners), case_insensitive=True, command_prefix=commands.when_mentioned_or(PREFIX))
+    owners), case_insensitive=True, command_prefix=commands.when_mentioned_or(PREFIX), debug_guilds=guilds)
 
 print('------')
 for filename in os.listdir('./utils/cogs'):

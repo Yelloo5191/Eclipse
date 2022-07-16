@@ -88,11 +88,6 @@ class ColorRoles(commands.Cog):
                     role = await ctx.guild.create_role(name=ROLES.names[color], color=int(list(ROLES.colors[color][i].keys())[0], 16))
                 else:
                     pass
-        for color in ROLES.colors:
-            for i in range(len(ROLES.colors[color])):
-                bot_role_pos = discord.utils.get(ctx.guild.roles, name=self.client.user.name).position
-                print(bot_role_pos + 1)
-                await role.edit(position=bot_role_pos - 1)
 
     @commands.command()
     @commands.is_owner()
@@ -113,6 +108,21 @@ class ColorRoles(commands.Cog):
                     ctx.guild.emojis, name=ROLES.numbers_names[i])
                 if emote:
                     await emote.delete()
+    
+    @commands.slash_command(guild_ids=guilds, name="orderroles")
+    @discord.default_permissions(
+        administrator=True,
+    )
+    @commands.cooldown(1, 30, commands.BucketType.user)
+    async def orderroles(self, ctx):
+        ctx.defer()
+        for color in ROLES.colors:
+            for i in range(len(ROLES.colors[color])):
+                role = discord.utils.get(
+                    ctx.guild.roles, name=ROLES.names[color], color=discord.Color(int(list(ROLES.colors[color][i].keys())[0], 16)))
+                bot_role_pos = discord.utils.get(ctx.guild.roles, name=self.client.user.name).position
+                await role.edit(position=bot_role_pos - 1)
+        await ctx.respond("Roles ordered")
     
     @commands.slash_command(guild_ids=guilds, name="removecolor")
     @commands.cooldown(1, 10, commands.BucketType.user)
