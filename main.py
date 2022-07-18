@@ -16,7 +16,7 @@ intents.message_content = True
 PREFIX = os.getenv("PREFIX")
 TOKEN = os.getenv('TOKEN')
 owners = [304024578009595907, 219323433719300105]
-guilds = [837808972902957128, 996816323013259365]
+guilds = [837808972902957128, 996816323013259365, 982118812805636136]
 client = commands.Bot(intents=intents, owner_ids=set(
     owners), case_insensitive=True, command_prefix=commands.when_mentioned_or(PREFIX), debug_guilds=guilds)
 
